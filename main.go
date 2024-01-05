@@ -5,30 +5,41 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 )
 
 type Weather struct {
-	Location struct {
-		Name      string `json:"name"`
-		Timezone  int64  `json:"timezone"`
-		Date_time int64  `json:"dt"`
-		Details   struct {
-			Country string `json:"country"`
-			Sunrise int64  `json:"sunrise"`
-			Sunset  int64  `json:"sunset"`
-		} `json:"sys"`
-	}
-	// Forecast []struct {
-	// 	Brief       string `json:"main"`
-	// 	Description string `json:"description"`
-	// 	Icon        string `json:"icon"`
-	// } `json:"weather"`
+	Date     int64  `json:"dt"`
+	Timezone int    `json:"timezone"`
+	City     string `json:"name"`
+	Coord    struct {
+		Longitude float32 `json:"lon"`
+		Latitude  float32 `json:"lat"`
+	} `json:"coord"`
 
-	// Main struct {
-	// 	Temp_High float32 `json:"temp_max"`
-	// 	Temp_Low  float32 `json:"temp_min"`
-	// 	Humidity  int     `json:"humidity"`
-	// } `json:"main"`
+	System struct {
+		Country string `json:"country"`
+		Sunrise int64  `json:"sunrise"`
+		Sunset  int64  `json:"sunset"`
+	} `json:"sys"`
+
+	Description []struct {
+		Short string `json:"main"`
+		Long  string `json:"description"`
+	} `json:"weather"`
+
+	Main struct {
+		TempAvg     float32 `json:"temp"`
+		TempHigh    float32 `json:"temp_max"`
+		TempLow     float32 `json:"temp_min"`
+		ATMPressure int32   `json:"pressure"`
+		Humidity    int32   `json:"humidity"`
+	} `json:"main"`
+
+	Wind struct {
+		Speed   float32 `json:"speed"`
+		Degrees float32 `json:"deg"`
+	} `json:"wind"`
 }
 
 func main() {
@@ -68,6 +79,19 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(weather)
+	// fmt.Println(weather)
+
+	city := weather.City
+	country := weather.System.Country
+	current := weather.Description[0].Long
+	tempAvg := weather.Main.TempAvg
+	date := time.Unix(weather.Date, 0).Local()
+	fmt.Printf("%s, %s(%.0f°C): %s\n", city, country, tempAvg, current)
+	fmt.Printf("Today %s \n", date)
+
+	tempHigh := weather.Main.TempHigh
+	tempLow := weather.Main.TempLow
+
+	fmt.Printf("Temperature range %.0f - %.0f\n", tempLow, tempHigh)
 
 }
