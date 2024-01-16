@@ -6,6 +6,10 @@ import (
 	"io"
 	"net/http"
 	"time"
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Weather struct {
@@ -43,13 +47,17 @@ type Weather struct {
 }
 
 func main() {
-	fmt.Println("Weather CLI")
+	fmt.Println("Weather CLI: Nairobi(-1.292066, 36.821945)")
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	var latitude, longitude float32 = -1.292066, 36.821945
-	var API_KEY string = "1bb59edb0bef71820e6a62339ec24627"
+	WEATHER_API_KEY := os.Getenv("WEATHER_API_KEY")
 	var BASE_URL string = "https://api.openweathermap.org/data/2.5/weather?"
-	// var BASE_URL string = "https://api.openweathermap.org/data/3.0/onecall?lat=-1.292066&lon=36.821945"
-	FULL_URL := fmt.Sprintf("%slat=%f&lon=%f&appid=%s&units=metric", BASE_URL, latitude, longitude, API_KEY)
+	FULL_URL := fmt.Sprintf("%slat=%f&lon=%f&appid=%s&units=metric", BASE_URL, latitude, longitude, WEATHER_API_KEY)
 
 	resp, err := http.Get(FULL_URL)
 
