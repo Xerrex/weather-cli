@@ -50,7 +50,8 @@ weather_snack
 ```
 
 ## Coming Up:
-* Testing
+* Tests
+* Take in coordinates in command line
 
 ## Acknowledgement:
 * [Credits](https://www.youtube.com/watch?v=zPYjfgxYO7k)

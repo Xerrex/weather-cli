@@ -8,6 +8,7 @@ import (
 	"time"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -20,17 +21,17 @@ type CityDetails struct{
 }
 
 var CitiesDetails = map[string]CityDetails{
-	"mombasa": CityDetails{"mombasa", -4.044420488531392, 39.67001728536259},
-	"nairobi": CityDetails{"nairobi", -1.2970091674162187, 36.821917335677504},
-	"naivasha": CityDetails{"naivasha", -0.7185111907604552, 36.440378974982345},
-	"nakuru": CityDetails{"nakuru", -0.3017192761345334, 36.062820762552924},
-	"eldoret": CityDetails{"eldoret", 0.5444355122581617, 35.250484945199055},
-	"kisumu": CityDetails{"kisumu", -0.09311678011290307, 34.752140939624525},
-	"thika": CityDetails{"thika", -0.9850818030818558, 37.04363218548822},
-	"nyahururu": CityDetails{"nyahururu", 0.07355733472573683, 36.35617270988145},
-	"nanyuki": CityDetails{"nanyuki", 0.05293356117980731, 37.02300840122002},
-	"marsabit": CityDetails{"marsabit", 2.4170771425557778, 37.99232626182558},
-	"garissa": CityDetails{"garissa", -0.4145353024440266, 39.621605219013645},
+	"mombasa": CityDetails{"Mombasa", -4.044420488531392, 39.67001728536259},
+	"nairobi": CityDetails{"Nairobi", -1.2970091674162187, 36.821917335677504},
+	"naivasha": CityDetails{"Naivasha", -0.7185111907604552, 36.440378974982345},
+	"nakuru": CityDetails{"Nakuru", -0.3017192761345334, 36.062820762552924},
+	"eldoret": CityDetails{"Eldoret", 0.5444355122581617, 35.250484945199055},
+	"kisumu": CityDetails{"Kisumu", -0.09311678011290307, 34.752140939624525},
+	"thika": CityDetails{"Thika", -0.9850818030818558, 37.04363218548822},
+	"nyahururu": CityDetails{"Nyahururu", 0.07355733472573683, 36.35617270988145},
+	"nanyuki": CityDetails{"Nanyuki", 0.05293356117980731, 37.02300840122002},
+	"marsabit": CityDetails{"Marsabit", 2.4170771425557778, 37.99232626182558},
+	"garissa": CityDetails{"Garissa", -0.4145353024440266, 39.621605219013645},
 }
 
 
@@ -69,11 +70,12 @@ type Weather struct {
 	} `json:"wind"`
 }
 
+
 func printCityList(){
 	fmt.Println("\nList of cities:")
 
 	for _, cityDetail := range CitiesDetails {
-		fmt.Printf("%s(latitude: %.4f, longitude: %.4f)\n", cityDetail.name, cityDetail.latitude, cityDetail.longitude)
+		fmt.Printf("%s -- latitude: %.4f, longitude: %.4f\n", cityDetail.name, cityDetail.latitude, cityDetail.longitude)
 	}
 }
 
@@ -169,7 +171,7 @@ func main() {
 			return
 		default:
 			// If none of the recognized options, treat it as a city name
-			cityName := os.Args[1]
+			cityName := strings.ToLower(os.Args[1])
 			cityDetails, err := getCityCoordinates(cityName)
 
 			if err != nil {
