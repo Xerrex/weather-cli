@@ -1,4 +1,5 @@
 # Weather Snack
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br/>
 A CLI weather app made with Go.<br/>
 [Github go docs](https://github.com/golang/tools/blob/master/gopls/doc/workspace.md)
 [Go package docs](https://pkg.go.dev/)
@@ -14,6 +15,11 @@ A CLI weather app made with Go.<br/>
 ```
 git clone <repo-url>
 cd weather_snack
+```
+
+* Initialize the go modules
+```
+go mod download
 ```
 
 * Setup environment variables and edit `.env`
@@ -42,6 +48,10 @@ sudo mv weather_snack /usr/bin
 ```
 weather_snack
 ```
+
+## Coming Up:
+* Receive city as command line argument.
+* Interactivity
 
 ## Acknowledgement:
 * [Credits](https://www.youtube.com/watch?v=zPYjfgxYO7k)
