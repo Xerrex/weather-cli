@@ -50,8 +50,7 @@ weather_snack
 ```
 
 ## Coming Up:
-* Receive city as command line argument.
-* Interactivity
+* Testing
 
 ## Acknowledgement:
 * [Credits](https://www.youtube.com/watch?v=zPYjfgxYO7k)
