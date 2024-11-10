@@ -97,8 +97,9 @@ func printHelp(){
 	fmt.Println("go run main.go [options]")
 
 	fmt.Println("Options:")
-	fmt.Println("  --help, -h   Show this help message")
-	fmt.Println("  --city-list, -l	Show the city list")
+	fmt.Println(" --help, -h 		Show this help message")
+	fmt.Println(" --city-list, -l 		Show the city list")
+  fmt.Println(" cityName 		Show the weather in the cityName, ie. Nairobi")
 }
 
 
