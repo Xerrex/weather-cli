@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to weather CLI")
+	fmt.Println("Welcome to weather CLI(Nairobi)")
 
 	err := godotenv.Load("../.env")
 	if err != nil {
