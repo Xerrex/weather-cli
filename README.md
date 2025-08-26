@@ -1,4 +1,4 @@
-# Weather Snack
+# Weather CLI
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br/>
 A CLI weather app made with Go.<br/>
 
@@ -11,7 +11,7 @@ A CLI weather app made with Go.<br/>
 ### Without building
 * Clone this repo & Change into folder
 ```bash
-git clone https://github.com/Xerrex/weather_snack.git
+git clone https://github.com/Xerrex/weather-cli.git
 cd weather_snack
 ```
 
