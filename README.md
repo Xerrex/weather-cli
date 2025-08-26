@@ -1,57 +1,41 @@
 # Weather Snack
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br/>
 A CLI weather app made with Go.<br/>
-[Github go docs](https://github.com/golang/tools/blob/master/gopls/doc/workspace.md)
-[Go package docs](https://pkg.go.dev/)
-
 
 ## Made with:
 - [Go](https://go.dev/) - Build simple, secure, scalable systems.
 - [OpenWeather](https://openweathermap.org/)
 
 
-## Setup:
-* Clone this repo
-```
-git clone <repo-url>
+## Setup & usage:
+### Without building
+* Clone this repo & Change into folder
+```bash
+git clone https://github.com/Xerrex/weather_snack.git
 cd weather_snack
 ```
 
+* Setup the environment variables & edit `.env`
+```bash
+cp envExample .env
+# edit '.env' 
+```
+
 * Initialize the go modules
-```
-go mod download
-```
-
-* Setup environment variables and edit `.env`
-```
-cp .envExample .env
+```bash
+go mod tidy
 ```
 
-## Run the project 
-### Without build
-```
-go run main.go
+* Run & use app
+```bash
+go run . 
+
+# Follow the usage instructions
 ```
 
-### With build
-* Build project
-```
-go build
-```
+### Build
+* Coming soon
 
-* Move executable file to /usr/bin
-```
-sudo mv weather_snack /usr/bin
-```
-
-* Run the project
-```
-weather_snack
-```
-
-## Coming Up:
-* Tests
-* Take in coordinates in command line
 
 ## Acknowledgement:
 * [Credits](https://www.youtube.com/watch?v=zPYjfgxYO7k)
