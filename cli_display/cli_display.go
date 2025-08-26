@@ -2,6 +2,7 @@ package cli_display
 
 import (
 	"fmt"
+	"strings"
 	"time"
 	"xerrex/weather/station"
 )
@@ -69,4 +70,11 @@ func timezoneFormatter(seconds int) string {
 func convertTimestampsTo24h(timestamp int64) string {
 	t := time.Unix(timestamp, 0)
 	return t.Format("15:04")
+}
+
+func ShowWeatherRawResponse(raw_response string) {
+	fmt.Println(strings.Repeat("=", 50))
+	fmt.Println("🟦 Raw response { } ")
+	fmt.Println(raw_response)
+	fmt.Println(strings.Repeat("=", 50) + "\n")
 }

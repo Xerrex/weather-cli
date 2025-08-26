@@ -4,16 +4,14 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"xerrex/weather/city_reader"
 	"xerrex/weather/cli_display"
 	"xerrex/weather/station"
 
-	// "strings"
-	// "xerrex/weather/cli_display"
-	// "xerrex/weather/station"
 	"github.com/joho/godotenv"
 )
+
+const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 func main() {
 
@@ -34,13 +32,27 @@ func main() {
 	case "--cities", "-c":
 		handleCitiesCmd(CITIES_JSON_FILE)
 		return
+	case "city":
+		var cityName string = ""
+		var cmdOpt string = ""
+
+		if len(cmdLineArgs) > 2 {
+			cityName = cmdLineArgs[2]
+		}
+
+		if len(cmdLineArgs) > 3 {
+			cmdOpt = cmdLineArgs[3]
+		}
+
+		handleCityCmd(cityName, cmdOpt)
+		return
 	default:
 		var cmdOpt string = ""
 		if len(cmdLineArgs) > 2 {
 			cmdOpt = cmdLineArgs[2]
 		}
 
-		handleCityCmd(command, cmdOpt, CITIES_JSON_FILE)
+		handleCityNameCmd(command, cmdOpt, CITIES_JSON_FILE)
 
 	}
 }
@@ -54,9 +66,11 @@ func handleHelpCmd() {
 	fmt.Println("--help/-h	Show this help message")
 	fmt.Println("--cities/-l	Show this help message")
 	fmt.Println("<city>		Show the weather in the city ie. Nairobi")
+	fmt.Println("city		Show the weather in the city provided as an option")
 
 	fmt.Println("\nOptions:")
 	fmt.Println("-f	Show the weather in the city ie. Nairobi & json response")
+	fmt.Println("<city>	Name of city to show the weather ie. Nairobi")
 
 	fmt.Println("\nExamples:")
 	fmt.Println("weather --help")
@@ -65,6 +79,7 @@ func handleHelpCmd() {
 	fmt.Println("weather -l")
 	fmt.Println("weather Nairobi")
 	fmt.Println("weather Nairobi -f")
+	fmt.Println("weather city Nairobi -f")
 
 }
 
@@ -76,7 +91,7 @@ func handleCitiesCmd(citiesJsonFile string) {
 	city_reader.DisplayCities(cities)
 }
 
-func handleCityCmd(cityName string, cmdOpt string, citiesJsonFile string) {
+func handleCityNameCmd(cityName string, cmdOpt string, citiesJsonFile string) {
 
 	cities, err := city_reader.ReadCitiesJson(citiesJsonFile)
 	if err != nil {
@@ -94,22 +109,36 @@ func handleCityCmd(cityName string, cmdOpt string, citiesJsonFile string) {
 	}
 
 	API_KEY := os.Getenv("WEATHER_API_KEY")
-	BASE_URL := os.Getenv("WEATHER_API_BASE_URL")
+
 	lat := city.Latitude
 	lon := city.Longitude
-	FULL_URL := fmt.Sprintf("%slat=%f&lon=%f&appid=%s&units=metric", BASE_URL, lat, lon, API_KEY)
+	FULL_URL := fmt.Sprintf("%s?lat=%f&lon=%f&appid=%s&units=metric", WEATHER_BASE_URL, lat, lon, API_KEY)
 
-	raw_response, weather, err := station.FetchWeather(FULL_URL)
+	cityWeatherHandler(FULL_URL, cmdOpt)
+}
+
+func handleCityCmd(cityName string, cmdOpt string) {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	API_KEY := os.Getenv("WEATHER_API_KEY")
+	FULL_URL := fmt.Sprintf("%s?q=%s&appid=%s&units=metric", WEATHER_BASE_URL, cityName, API_KEY)
+
+	cityWeatherHandler(FULL_URL, cmdOpt)
+}
+
+func cityWeatherHandler(weatherURL string, cmdOpt string) {
+
+	raw_response, weather, err := station.FetchWeather(weatherURL)
 
 	if err != nil {
 		panic(err)
 	}
 
 	if cmdOpt == "-f" {
-		fmt.Println(strings.Repeat("=", 50))
-		fmt.Println("Raw response")
-		fmt.Println(raw_response)
-		fmt.Println(strings.Repeat("=", 50) + "\n")
+		cli_display.ShowWeatherRawResponse(raw_response)
 	}
 
 	cli_display.ShowWeatherData(weather)
