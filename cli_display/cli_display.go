@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"time"
+	"xerrex/weather/city_reader"
 	"xerrex/weather/station"
 )
 
@@ -77,4 +78,15 @@ func ShowWeatherRawResponse(raw_response string) {
 	fmt.Println("🟦 Raw response { } ")
 	fmt.Println(raw_response)
 	fmt.Println(strings.Repeat("=", 50) + "\n")
+}
+
+func ShowCities(cities []city_reader.City) {
+
+	fmt.Printf("%-4s %-15s %-16s %-16s \n", "#", "Name", "Latitude", "Longitude")
+	fmt.Println("------------------------------------------------------------")
+
+	for index, city := range cities {
+		fmt.Printf("%-4d %-15s %-16.8f %-16.8f\n", index+1, city.Name, city.Latitude, city.Longitude)
+		fmt.Println("------------------------------------------------------------")
+	}
 }

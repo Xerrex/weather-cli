@@ -31,17 +31,6 @@ func ReadCitiesJson(file_path string) ([]City, error) {
 	return cities, nil
 }
 
-func DisplayCities(cities []City) {
-
-	fmt.Printf("%-4s %-15s %-16s %-16s \n", "#", "Name", "Latitude", "Longitude")
-	fmt.Println("------------------------------------------------------------")
-
-	for index, city := range cities {
-		fmt.Printf("%-4d %-15s %-16.8f %-16.8f\n", index+1, city.Name, city.Latitude, city.Longitude)
-		fmt.Println("------------------------------------------------------------")
-	}
-}
-
 func GetCityDetails(name string, cities []City) (City, error) {
 	var cityName string = strings.ToLower(name)
 

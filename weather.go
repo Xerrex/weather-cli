@@ -88,7 +88,8 @@ func handleCitiesCmd(citiesJsonFile string) {
 	if err != nil {
 		panic(err)
 	}
-	city_reader.DisplayCities(cities)
+
+	cli_display.ShowCities(cities)
 }
 
 func handleCityNameCmd(cityName string, cmdOpt string, citiesJsonFile string) {
