@@ -30,7 +30,7 @@ func ShowWeatherData(weatherData station.Weather) {
 	}
 	fmt.Printf("%s Wind Speed: %s m/s\n", "💨", fmt.Sprintf("%.1f", weatherData.Wind.Speed))
 	fmt.Printf("%s Wind Degrees: %s°\n", "🧭", fmt.Sprintf("%.1f", weatherData.Wind.Degrees))
-	fmt.Printf("%s Visibility: %s \n", "👀", fmt.Sprintf("%d", weatherData.Visibility))
+	fmt.Printf("%s Visibility: %s metres\n", "👀", fmt.Sprintf("%d", weatherData.Visibility))
 
 	fmt.Printf("%s TimeZone: %s\n", "🕐", timezoneFormatter(weatherData.Timezone))
 	fmt.Printf("%s Sunrise: %s \n", "🌅", convertTimestampsTo24h(weatherData.System.Sunrise))
