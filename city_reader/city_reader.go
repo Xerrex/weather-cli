@@ -33,8 +33,12 @@ func ReadCitiesJson(file_path string) ([]City, error) {
 
 func DisplayCities(cities []City) {
 
+	fmt.Printf("%-4s %-15s %-16s %-16s \n", "#", "Name", "Latitude", "Longitude")
+	fmt.Println("------------------------------------------------------------")
+
 	for index, city := range cities {
-		fmt.Printf("%d.  %s -- latitude: %.8f, longitude: %.8f\n", index+1, city.Name, city.Latitude, city.Longitude)
+		fmt.Printf("%-4d %-15s %-16.8f %-16.8f\n", index+1, city.Name, city.Latitude, city.Longitude)
+		fmt.Println("------------------------------------------------------------")
 	}
 }
 
@@ -42,7 +46,7 @@ func GetCityDetails(name string, cities []City) (City, error) {
 	var cityName string = strings.ToLower(name)
 
 	for _, city := range cities {
-		// var city_name string = strings.ToLower(city.Name)
+
 		if cityName == strings.ToLower(city.Name) {
 			return city, nil
 		}
