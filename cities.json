@@ -1,0 +1,15 @@
+[
+	{"name": "Mombasa", "latitude": -4.044420488531392, "longitude": 39.67001728536259},
+	{"name": "Nairobi", "latitude": -1.2970091674162187, "longitude": 36.821917335677504},
+	{"name": "Naivasha", "latitude": -0.7185111907604552, "longitude": 36.440378974982345},
+	{"name": "Nakuru", "latitude": -0.3017192761345334, "longitude": 36.062820762552924},
+	{"name": "Eldoret", "latitude": 0.5444355122581617, "longitude": 35.250484945199055},
+	{"name": "Kisumu", "latitude": -0.09311678011290307, "longitude": 34.752140939624525},
+	{"name": "Thika", "latitude": -0.9850818030818558, "longitude": 37.04363218548822},
+	{"name": "Nyahururu", "latitude": 0.07355733472573683, "longitude": 36.35617270988145},
+	{"name": "Nanyuki", "latitude": 0.05293356117980731, "longitude": 37.02300840122002},
+	{"name": "Marsabit", "latitude": 2.4170771425557778, "longitude": 37.99232626182558},
+	{"name": "Garissa", "latitude": -0.4145353024440266, "longitude": 39.621605219013645},
+  {"name": "Bogota", "latitude": 4.764988778348153, "longitude": -74.09101308996492},
+  {"name": "Medellin", "latitude": 6.236669789925299, "longitude": -75.57234567762238}
+]

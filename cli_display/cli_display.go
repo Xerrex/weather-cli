@@ -1,9 +1,9 @@
-package display
+package cli_display
 
 import (
 	"fmt"
 	"time"
-	"xerrex/station"
+	"xerrex/weather/station"
 )
 
 /* NOTE: when to user pointer or value

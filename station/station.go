@@ -45,7 +45,7 @@ type Weather struct {
 	Visibility int `json:"visibility"`
 }
 
-func Fetchweather(lat float64, lon float64, apiUrl string) (string, Weather, error) {
+func FetchWeather(apiUrl string) (string, Weather, error) {
 	// Get the weather at the provided longitude(lon)
 	// and latitude(lat)
 
